@@ -1,0 +1,9 @@
+spring:
+  zipkin:
+    base-url: localhost:9411
+
+item-service:
+  url: localhost:8080
+
+server:
+  port: 8081
