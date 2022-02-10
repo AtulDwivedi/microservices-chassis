@@ -1,0 +1,46 @@
+version: '3.7'
+services:
+  elastic-search:
+    image: elasticsearch:7.13.4
+    container_name: elasticsearch
+    restart: always
+    ports:
+      - 9200:9200
+      - 9300:9300
+    environment:
+      - discovery.type=single-node
+    networks:
+      - microservices-chassis
+  kibana:
+    image: kibana:7.13.4
+    container_name: kibana
+    restart: always
+    ports:
+      - 5601:5601
+    environment:
+      - ELASTICSEARCH_HOST=http://elasticsearch:9200
+    networks:
+      - microservices-chassis
+  logstash:
+    image: logstash:7.13.4
+    container_name: logstash
+    restart: always
+    ports:
+      - 5001:5001
+    volumes:
+      - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+    networks:
+      - microservices-chassis
+
+  item-service:
+    image: item-service:latest
+    container_name: item-service
+    ports:
+      - 8080:8080
+    networks:
+      - microservices-chassis
+
+networks:
+  microservices-chassis:
+    external:
+      name: microservices-chassis

@@ -3,6 +3,7 @@ package com.atuldwivedi.microserviceschassis.item.rest;
 import com.atuldwivedi.microserviceschassis.item.dao.BaseDataDao;
 import com.atuldwivedi.microserviceschassis.item.model.Item;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,6 +16,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/items")
 public class ItemController {
+
+    @GetMapping
     public List<Item> getItems() {
         log.info("Getting items");
         return BaseDataDao.getItems();
