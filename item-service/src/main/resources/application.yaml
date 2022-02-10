@@ -1,3 +1,5 @@
 spring:
   zipkin:
     base-url: localhost:9411
+    service:
+      name: item-service
